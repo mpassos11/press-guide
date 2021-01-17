@@ -7,7 +7,7 @@ router.get('/admin/categories/new', (req, res) => {
     res.render('admin/categories/new');
 });
 
-router.post('/categories/save', (req, res) => {
+router.post('/admin/categories/save', (req, res) => {
     var title = req.body.title;
     
     // no title undefined
@@ -19,6 +19,14 @@ router.post('/categories/save', (req, res) => {
         slug: slugify(title)
     }).then(() => {
         res.redirect('/')
+    });
+});
+
+router.get('/admin/categories', (req, res) => {
+    Category.findAll().then(categories => {
+        res.render('admin/categories/index', {
+            categories: categories
+        });
     });
 });
 
