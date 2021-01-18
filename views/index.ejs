@@ -1,3 +1,16 @@
 <%- include('partials/header.ejs') %>
-
+<br>
+<div class="container">
+    <% articles.forEach(article => { %>
+        <div class="card">
+            <div class="card-header">
+                <%= article.title %> 
+            </div>
+            <div class="card-body text-end">
+                <button class="btn btn-success">Read more</button>
+            </div>
+        </div>
+        <br>
+    <% }) %>
+</div>
 <%- include('partials/footer.ejs') %>

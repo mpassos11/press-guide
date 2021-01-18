@@ -33,7 +33,11 @@ app.use('/', categoriesController);
 app.use('/', articlesController);
 
 app.get("/", (req, res) => {
-    res.render('index');
+    articleModel.findAll().then(articles => {
+        res.render('index', {
+            articles: articles
+        });
+    });
 });
 
 app.listen(4000, () => { console.log('App working!'); });
