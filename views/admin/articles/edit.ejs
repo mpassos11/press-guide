@@ -1,0 +1,36 @@
+<%- include('../../partials/header.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>Edit article</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/articles/update" method="post">
+                <label for="title">Article title:</label>
+                <input type="text" name="title" id="title" class="form-control" value="<%= article.title %>"><br>
+                <textarea name="body" id="body" class="form-control"><%= article.body %></textarea><br>
+                <label for="category">Category:</label><br>
+                <select name="category" id="category" class="form-control">
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>" <% if (article.categoryId == category.id) { %>selected="selected"<% } %>>
+                            <%= category.title %>
+                        </option>
+                    <% }) %>
+                </select><br>
+                <input type="hidden" name="id" value="<%= article.id %> ">
+                <button type="submit" class="btn btn-success">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../../partials/footer.ejs') %> 
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#body',
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    });
+</script>

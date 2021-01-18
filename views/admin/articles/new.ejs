@@ -1,0 +1,33 @@
+<%- include('../../partials/header.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h2>New article</h2>
+        </div>
+        <div class="card-body">
+            <form action="/admin/articles/save" method="post">
+                <label for="title">Article title:</label>
+                <input type="text" name="title" id="title" class="form-control"><br>
+                <textarea name="body" id="body" class="form-control"></textarea><br>
+                <label for="category">Category:</label><br>
+                <select name="category" id="category" class="form-control">
+                    <% categories.forEach(category => { %>
+                        <option value="<%= category.id %>"><%= category.title %></option>
+                    <% }) %>
+                </select><br>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../../partials/footer.ejs') %> 
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#body',
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    });
+</script>

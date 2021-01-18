@@ -80,6 +80,6 @@ router.post('/admin/categories/update', (req, res) => {
     }).then(() => {
         res.redirect('/admin/categories');
     });
-})
+});
 
 module.exports = router;

@@ -1,0 +1,54 @@
+<%- include('../../partials/header.ejs') %>
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Listing of articles</h2>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="/admin/articles/new" class="btn btn-success">New</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Slug</th>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% articles.forEach(article => { %>
+                        <tr>
+                            <td><%= article.id %> </td>
+                            <td><%= article.title %> </td>
+                            <td><%= article.slug %> </td>
+                            <td><%= article.category.title %> </td>
+                            <td>
+                                <a href="/admin/articles/edit/<%= article.id %> " class="btn btn-warning">Edit</a>
+                                <form action="/admin/articles/delete" method="post" style="display: inline;">
+                                    <input type="hidden" name="id" value="<%= article.id %> ">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include('../../partials/footer.ejs') %> 
+<script>
+    $('body').on('click', '.btn-danger', function(e) {
+        e.preventDefault();
+        if (confirm('Do you want to delete the record?'))
+            $(this).parent().submit();
+    });
+</script>
